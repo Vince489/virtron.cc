@@ -1,1 +1,14 @@
 
+# Virt Protocol Metadata File
+# Located at: https://your-server.com/vrt.txt
+
+vrt-title: The Decentralized Art Gallery
+vrt-description: A private collection of digital art hosted on the Virt parallel protocol. No tracking, no ICANN, just art.
+vrt-keywords: art, gallery, decentralized, crypto, museum
+vrt-category: art
+vrt-language: en
+vrt-icon: https://your-server.com/assets/favicon.png
+
+# Security & Verification
+vrt-verification-token: vmc_abc123_xyz789_key
+vrt-contact: admin@your-server.com
