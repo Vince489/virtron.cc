@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Virtron</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    /* Prevent text wrapping during the transition */
+    .sidebar-item {
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    
+    .sidebar-item i {
+      min-width: 24px;
+    }
+
+    /* Transition for the sidebar width and main content margin */
+    #sidebar, #mainContent {
+      transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+    }
+
+    /* Smooth Fade for Sidebar Text */
+    .sidebar-text {
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* When the sidebar has the 'collapsed' class, fade out the text */
+    #sidebar.collapsed .sidebar-text {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Custom scrollbar styling for dark theme */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1e293b; /* slate-800 */
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #334155; /* slate-700 */
+      border-radius: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569; /* slate-600 */
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-white font-sans">
+  
+  <!-- Top Navigation Bar -->
+  <div class="fixed top-0 left-0 right-0 bg-slate-800 z-50 px-4 py-3 flex items-center justify-between border-b border-slate-700">
+    <div class="flex items-center space-x-4">
+      <button id="menuToggle" class="text-white p-2 rounded-md hover:bg-slate-700 focus:outline-none">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a href="/home.html">
+        <img src="/logo.png" alt="Virtron Logo" class="h-8">
+      </a>
+    </div>
+
+    <div class="hidden md:flex flex-1 max-w-md mx-4">
+      <div class="relative w-full">
+        <input type="text" placeholder="Search topics" class="w-full px-4 py-2 bg-slate-700 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-3">
+      <button class="w-10 h-10 hover:bg-slate-700 rounded-full flex items-center justify-center shrink-0">
+        <i class="far fa-bell"></i>
+      </button>
+      <button class="w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center shrink-0">
+        <i class="far fa-user"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="fixed left-0 top-0 h-full bg-slate-800 z-40 pt-16 overflow-x-hidden border-r border-slate-700">
+    <div class="p-3 space-y-4">
+      <div class="space-y-1">
+        <a href="#" class="sidebar-item flex items-center p-2 rounded-md hover:bg-slate-700">
+          <i class="fas fa-tachometer-alt text-center mr-3"></i>
+          <span class="sidebar-text">Dashboard</span>
+        </a>
+        <a href="#" class="sidebar-item flex items-center p-2 rounded-md hover:bg-slate-700">
+          <i class="fas fa-rocket w-6 text-center mr-3 text-blue-400"></i>
+          <span class="sidebar-text">Getting Started</span>
+        </a>
+
+        <hr class="border-slate-700 my-2">
+
+        <div>
+          <button id="govBtn" class="sidebar-item w-full flex items-center p-2 rounded-md hover:bg-slate-700 transition">
+            <i class="fas fa-gavel w-6 text-center mr-3 text-orange-500"></i>
+            <span class="sidebar-text flex-1 text-left">Governance</span>
+            <i id="govArrow" class="fas fa-chevron-down text-[10px] sidebar-text transition-transform duration-200"></i>
+          </button>
+          <div id="govMenu" class="hidden mt-1 space-y-1 bg-slate-900/40 rounded-md">
+            <a href="#" class="sidebar-item flex items-center p-2 pl-11 rounded-md hover:text-white hover:bg-slate-700 text-sm text-gray-400">
+              <span class="sidebar-text">EAC</span>
+            </a>
+            <a href="#" class="sidebar-item flex items-center p-2 pl-11 rounded-md hover:text-white hover:bg-slate-700 text-sm text-gray-400">
+              <span class="sidebar-text">EBCA</span>
+            </a>
+          </div>
+        </div>
+        <a href="#" class="sidebar-item flex items-center p-2 rounded-md hover:bg-slate-700">
+          <i class="fas fa-database w-6 text-center mr-3 text-white"></i>
+          <span class="sidebar-text">FYTREC</span>
+        </a>
+
+        <a href="#" class="sidebar-item flex items-center p-2 rounded-md hover:bg-slate-700">
+          <i class="far fa-star text-center mr-3"></i>
+          <span class="sidebar-text">Code of Conduct</span>
+        </a>
+        <a href="#" class="sidebar-item flex items-center p-2 rounded-md hover:bg-slate-700">
+          <i class="fas fa-fire w-6 text-center mr-3"></i>
+          <span class="sidebar-text">Fight Hype</span>
+        </a>
+        <a href="#" class="sidebar-item flex items-center p-2 rounded-md hover:bg-slate-700">
+          <i class="far fa-star w-6 text-center mr-3"></i>
+          <span class="sidebar-text">Promoters</span>
+        </a>
+      </div>
+
+      <hr class="border-slate-700 my-2">
+
+      <div class="space-y-1">
+        <a href="#" class="sidebar-item flex items-center p-2 rounded-md hover:bg-slate-700">
+          <i class="far fa-bookmark text-center mr-3"></i>
+          <span class="sidebar-text">Saved</span>
+        </a>
+        <a href="#" class="sidebar-item flex items-center p-2 rounded-md hover:bg-slate-700">
+          <i class="fas fa-history text-center mr-3"></i>
+          <span class="sidebar-text">PPV</span>
+        </a>
+      </div>
+      <hr class="border-slate-700 my-2">
+
+      <div>
+        <div class="sidebar-text px-2 mb-2 text-xs uppercase tracking-wide text-gray-400">Popular Categories</div>
+        <a href="#" class="sidebar-item flex items-center p-2 rounded-md hover:bg-slate-700">
+          <i class="fas fa-laptop w-6 text-center mr-3"></i>
+          <span class="sidebar-text">Technology</span>
+        </a>
+        <a href="#" class="sidebar-item flex items-center p-2 rounded-md hover:bg-slate-700">
+          <i class="fas fa-gamepad w-6 text-center mr-3"></i>
+          <span class="sidebar-text">Gaming</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay for mobile -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
+
+  <!-- Main Content Area -->
+  <div id="mainContent" class="pt-16 min-h-screen">
+    <div class="p-6">
+        <h1 class="text-2xl font-bold">Home</h1>
+    </div>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    const menuToggle = document.getElementById('menuToggle');
+    const overlay = document.getElementById('overlay');
+
+    function setSidebarState() {
+      const isMobile = window.innerWidth < 768;
+
+      if (isMobile) {
+        // Mobile Default: Hidden
+        sidebar.style.width = "0px";
+        mainContent.style.marginLeft = "0px";
+        sidebar.classList.add('collapsed');
+        overlay.classList.add('hidden');
+      } else {
+        // Desktop Default: Expanded
+        sidebar.style.width = "256px";
+        mainContent.style.marginLeft = "256px";
+        sidebar.classList.remove('collapsed');
+      }
+    }
+
+    function toggleSidebar() {
+      const isMobile = window.innerWidth < 768;
+      const currentWidth = sidebar.style.width;
+
+      if (isMobile) {
+        if (currentWidth === "0px" || currentWidth === "") {
+          sidebar.style.width = "256px";
+          sidebar.classList.remove('collapsed');
+          overlay.classList.remove('hidden');
+        } else {
+          sidebar.style.width = "0px";
+          sidebar.classList.add('collapsed');
+          overlay.classList.add('hidden');
+        }
+      } else {
+        // Desktop: Toggle between 64px (icons) and 256px (full)
+        if (currentWidth === "256px") {
+          sidebar.style.width = "64px";
+          mainContent.style.marginLeft = "64px";
+          sidebar.classList.add('collapsed');
+        } else {
+          sidebar.style.width = "256px";
+          mainContent.style.marginLeft = "256px";
+          sidebar.classList.remove('collapsed');
+        }
+      }
+    }
+
+    govBtn.addEventListener('click', () => {
+      if (sidebar.classList.contains('w-16')) {
+        toggleSidebar();
+      }
+      govMenu.classList.toggle('hidden');
+      govArrow.classList.toggle('rotate-180');
+    });
+
+    menuToggle.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
+    window.addEventListener('load', setSidebarState);
+    window.addEventListener('resize', setSidebarState);
+  </script>
+</body>
+</html>
